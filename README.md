@@ -1,4 +1,5 @@
 ## Overview
+![CI](https://github.com/christopherarter/claire-demo/actions/workflows/ci.yml/badge.svg)
 
 This (hopefully) follows the requirements of the assesment.
 
