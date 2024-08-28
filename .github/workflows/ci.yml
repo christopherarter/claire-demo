@@ -1,0 +1,30 @@
+name: CI
+
+on: push
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+
+    - name: Set Application Key
+      run: cp .env.example .env && php artisan key:generate
+
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Run Linter
+      run: composer pint
+
+    - name: Run Static Analysis
+      run: composer analyze
+
+    - name: Run Tests
+      run: php artisan test
